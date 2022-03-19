@@ -1,30 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/13 14:46:50 by barodrig          #+#    #+#             */
-/*   Updated: 2021/10/15 17:11:35 by barodrig         ###   ########.fr       */
+/*   Created: 2022/03/19 17:47:20 by barodrig          #+#    #+#             */
+/*   Updated: 2022/03/19 18:03:21 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include "philo.h"
 
-void	*ft_calloc(size_t count, size_t size)
+void	ft_putstr(char *s)
 {
-	unsigned char	*str;
-	size_t			i;
+	int	i;
+
+	if (!s)
+		return ;
+	i = 0;
+	while (s[i])
+		write(1, &s[i++], 1);
+}
+
+int	ft_isdigit(int c)
+{
+	if (c >= 48 && c <= 57)
+		return (1);
+	else
+		return (0);
+}
+
+int	is_arg_digit(char *str)
+{
+	int	i;
 
 	i = 0;
-	str = malloc(count * size);
-	if (!(str))
-		return (0);
-	while (i < (count * size))
+	while (str[i])
 	{
-		*(str + i) = 0;
+		if (!ft_isdigit(str[i]))
+			return (0);
 		i++;
 	}
-	return (str);
+	return (1);
 }
