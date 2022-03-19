@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/19 17:29:28 by barodrig          #+#    #+#             */
-/*   Updated: 2022/03/19 17:31:44 by barodrig         ###   ########.fr       */
+/*   Created: 2021/10/26 12:20:03 by barodrig          #+#    #+#             */
+/*   Updated: 2021/10/27 11:28:18 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "../includes/libft.h"
 
-# include "unistd.h"
-# include "pthread.h"
-# include "stdio.h"
-# include "stdlib.h"
-# include "sys/time.h"
-
-#endif
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	while (*s1 == *s2 && *s1 && *s2)
+	{
+		s1++;
+		s2++;
+	}
+	return ((unsigned char)*s1 - (unsigned char)*s2);
+}

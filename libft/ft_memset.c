@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: barodrig <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/19 17:29:28 by barodrig          #+#    #+#             */
-/*   Updated: 2022/03/19 17:31:44 by barodrig         ###   ########.fr       */
+/*   Created: 2021/01/13 10:50:13 by barodrig          #+#    #+#             */
+/*   Updated: 2021/01/18 14:20:00 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "../includes/libft.h"
 
-# include "unistd.h"
-# include "pthread.h"
-# include "stdio.h"
-# include "stdlib.h"
-# include "sys/time.h"
+void	*ft_memset(void *b, int c, size_t len)
+{
+	unsigned char	*temp;
+	size_t			i;
 
-#endif
+	temp = (unsigned char *)b;
+	i = 0;
+	while (i < len)
+	{
+		temp[i++] = (unsigned char)c;
+	}
+	return (b);
+}

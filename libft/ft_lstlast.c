@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/19 17:29:28 by barodrig          #+#    #+#             */
-/*   Updated: 2022/03/19 17:31:44 by barodrig         ###   ########.fr       */
+/*   Created: 2021/01/15 11:56:22 by barodrig          #+#    #+#             */
+/*   Updated: 2021/10/15 17:10:11 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "../includes/libft.h"
 
-# include "unistd.h"
-# include "pthread.h"
-# include "stdio.h"
-# include "stdlib.h"
-# include "sys/time.h"
+t_list	*ft_lstlast(t_list *lst)
+{
+	t_list	*tmp;
 
-#endif
+	tmp = lst;
+	if (!lst)
+		return (NULL);
+	while (lst)
+	{
+		lst = lst->next;
+		if (lst != NULL)
+			tmp = lst;
+	}
+	return (tmp);
+}

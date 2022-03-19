@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/19 17:29:28 by barodrig          #+#    #+#             */
-/*   Updated: 2022/03/19 17:31:44 by barodrig         ###   ########.fr       */
+/*   Created: 2021/01/11 11:49:04 by barodrig          #+#    #+#             */
+/*   Updated: 2021/11/04 10:54:32 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "../includes/libft.h"
 
-# include "unistd.h"
-# include "pthread.h"
-# include "stdio.h"
-# include "stdlib.h"
-# include "sys/time.h"
-
-#endif
+int	ft_toupper(int c)
+{
+	if (c >= 97 && c <= 122)
+		return (c - 32);
+	return (c);
+}

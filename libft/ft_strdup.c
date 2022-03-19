@@ -1,22 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/19 17:29:28 by barodrig          #+#    #+#             */
-/*   Updated: 2022/03/19 17:31:44 by barodrig         ###   ########.fr       */
+/*   Created: 2021/01/13 15:12:20 by barodrig          #+#    #+#             */
+/*   Updated: 2021/10/15 17:00:37 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "../includes/libft.h"
 
-# include "unistd.h"
-# include "pthread.h"
-# include "stdio.h"
-# include "stdlib.h"
-# include "sys/time.h"
+char	*ft_strdup(const char *s1)
+{
+	unsigned int	i;
+	unsigned int	len;
+	char			*str;
 
-#endif
+	len = 0;
+	while (s1[len])
+		len++;
+	str = malloc(sizeof(*s1) * (len + 1));
+	if (!(str))
+		return (0);
+	i = 0;
+	while (i < len)
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}

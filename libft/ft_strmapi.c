@@ -1,22 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/19 17:29:28 by barodrig          #+#    #+#             */
-/*   Updated: 2022/03/19 17:31:44 by barodrig         ###   ########.fr       */
+/*   Created: 2021/01/14 15:48:52 by barodrig          #+#    #+#             */
+/*   Updated: 2021/10/15 16:57:42 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "../includes/libft.h"
 
-# include "unistd.h"
-# include "pthread.h"
-# include "stdio.h"
-# include "stdlib.h"
-# include "sys/time.h"
+char	*ft_strmapi(char const *str, char (*f)(unsigned int, char))
+{
+	char	*map;
+	int		i;
+	int		len;
 
-#endif
+	if (!str || !f)
+		return (NULL);
+	i = 0;
+	map = NULL;
+	len = ft_strlen((char *)str);
+	map = (char *)malloc(sizeof(char) * (len + 1));
+	if (!(map))
+		return (NULL);
+	while (i < len)
+	{
+		map[i] = f(i, str[i]);
+		i++;
+	}
+	map[i] = '\0';
+	return (map);
+}

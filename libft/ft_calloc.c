@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/19 17:29:28 by barodrig          #+#    #+#             */
-/*   Updated: 2022/03/19 17:31:44 by barodrig         ###   ########.fr       */
+/*   Created: 2021/01/13 14:46:50 by barodrig          #+#    #+#             */
+/*   Updated: 2021/10/15 17:11:35 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "../includes/libft.h"
 
-# include "unistd.h"
-# include "pthread.h"
-# include "stdio.h"
-# include "stdlib.h"
-# include "sys/time.h"
+void	*ft_calloc(size_t count, size_t size)
+{
+	unsigned char	*str;
+	size_t			i;
 
-#endif
+	i = 0;
+	str = malloc(count * size);
+	if (!(str))
+		return (0);
+	while (i < (count * size))
+	{
+		*(str + i) = 0;
+		i++;
+	}
+	return (str);
+}
