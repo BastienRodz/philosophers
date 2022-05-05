@@ -6,7 +6,7 @@
 #    By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 15:58:49 by barodrig          #+#    #+#              #
-#    Updated: 2022/05/04 16:57:07 by barodrig         ###   ########.fr        #
+#    Updated: 2022/05/05 16:17:30 by barodrig         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,12 @@ GREEN			= \033[1;32m
 
 SRCS			= srcs/philo.c \
 					srcs/print.c \
-					srcs/init.c
+					srcs/init_data.c \
+					srcs/init_philo.c \
+					srcs/utils.c \
+					srcs/free_all.c \
+					srcs/time.c \
+					srcs/routine.c
 
 OBJS			= $(SRCS:.c=.o)
 

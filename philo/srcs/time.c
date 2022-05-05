@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/04 16:07:27 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/05 13:57:50 by barodrig         ###   ########.fr       */
+/*   Created: 2022/05/05 14:41:49 by barodrig          #+#    #+#             */
+/*   Updated: 2022/05/05 16:35:35 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int ft_putstr_fd(char *str, int fd)
+long int	time_from_start(t_data *data)
 {
-    int i;
-    
-    i = -1;
-    if (!str || !str[0])
-        return (1);
-    while (str[++i])
-    {
-        write(fd, &str[i], 1);
-    }
-    write(fd, "\n", 1);
-    return (1);
+	return(time_is() - data->tm_start);
+}
+
+long int	time_is(void)
+{
+	struct timeval time;
+	long int	time_conv_ms;
+	gettimeofday(&time, NULL);
+	time_conv_ms = (time.tv_sec * 1000) + (time.tv_usec / 1000);
+	return (time_conv_ms);
+}
+
+void		sleep_opti(long int sleep_time)
+{
+	long int	start;
+
+	start = time_is();
+	while ((time_is() - start) < sleep_time)
+		usleep(sleep_time / 10);
 }

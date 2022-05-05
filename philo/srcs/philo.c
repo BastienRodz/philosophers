@@ -6,42 +6,75 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:01:44 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/04 16:55:46 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/05 17:08:30 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void    *routine()
+int	start_routine(t_data *data)
 {
-    printf("START prout\n");
-    sleep(3);
-    printf("lalala END\n");
-    return (NULL);
+	int	i;
+
+	i = -1;
+	while (++i < data->philo_nbr)
+	{
+		if (i % 2 == 1)
+			sleep_opti(5);
+		if (pthread_create(&data->philo_th[i], NULL, \
+				&philo_routine, (void *)&data->philos[i]))
+				return (ft_putstr_fd("Failed to create a philo thread.", 2));
+	}
+	return (0);
 }
 
-void    set_threads(char **av, int philo_nbr)
+int	wait_for_threads(t_data *data)
 {
-    t_data *data;
+	int	i;
 
-    data = (t_data *)malloc(sizeof(t_data));
-    if (!data)
-        return (ft_putstr_fd("Data malloc error\n", 2));
-    data_init(data, av);
-    
+	i = -1;
+	while (++i < data->philo_nbr)
+	{
+		if (pthread_join(data->philo_th[i], NULL))
+			return (ft_putstr_fd("Error while joining a thread.(philo_th)", 2));
+		if (pthread_join(data->philos[i].monitor, NULL))
+			return (ft_putstr_fd("Error while joining a thead.(monitor)", 2));
+	}
+	return (0);
 }
 
-int main(int ac, char **av)
+int	set_threads(char **av, t_data *data)
 {
-    int i;
+	if (!data)
+		return (ft_putstr_fd("Struct 'data' malloc error.", 2));
+	if (data_init(data, av))
+		return (ft_putstr_fd("Init in struct 'data' error.", 2));
+	if (get_mutex_ready(data))
+		return (1);
+	if (create_philo_threads(data))
+		return (1);
+	if (wait_for_threads(data))
+		return (1);
+	start_routine(data);
+	return (0);
+}
 
-    i = 0;
-    if (ac < 5 || ac > 6)
-        return (ft_putstr_fd("Wrong number of arguments (5 or 6 needed).", 2));
-    while (++i < ac)
-    {
-        if (ft_atoi(av[i]) < 0)
-            return (ft_putstr_fd("Arguments can't be negatives numbers."), 2);
-    }
-    set_threads(av, ft_atoi(av[1]));
+int	main(int ac, char **av)
+{
+	int		i;
+	t_data	*data;
+
+	i = 0;
+	data = (t_data *)malloc(sizeof(t_data));
+	if (ac < 5 || ac > 6)
+		return (ft_putstr_fd("Wrong number of arguments (5 or 6 needed).", 2));
+	while (++i < ac)
+	{
+		if (ft_atoi(av[i]) < 0)
+			return (ft_putstr_fd("Arguments can't be negatives numbers.", 2));
+	}
+	if (set_threads(av, data))
+		return(_exit_philo(data), 1);
+	_exit_philo(data);
+	printf("OVEEEEER\n");
 }

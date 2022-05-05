@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/04 16:07:27 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/05 13:57:50 by barodrig         ###   ########.fr       */
+/*   Created: 2022/05/05 16:16:39 by barodrig          #+#    #+#             */
+/*   Updated: 2022/05/05 16:22:31 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int ft_putstr_fd(char *str, int fd)
+void	*philo_routine(void *p_data)
 {
-    int i;
-    
-    i = -1;
-    if (!str || !str[0])
-        return (1);
-    while (str[++i])
-    {
-        write(fd, &str[i], 1);
-    }
-    write(fd, "\n", 1);
-    return (1);
+	t_philo	*philo;
+
+	philo = (t_philo *)p_data;
+	printf("The time since philo[%i] started is %li\n", philo->id, time_is());
+	return (NULL);
 }
