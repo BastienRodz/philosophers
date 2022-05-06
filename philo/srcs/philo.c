@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:01:44 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/06 12:55:57 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/06 16:58:44 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int	wait_for_threads(t_data *data)
 	{
 		if (pthread_join(data->philo_th[i], NULL))
 			return (ft_putstr_fd("Error while joining a thread.(philo_th)", 2));
-		/*if (pthread_join(*data->philos[i].monitor, NULL))
-			return (ft_putstr_fd("Error while joining a thead.(monitor)", 2));*/
+		if (pthread_join(*data->philos[i].monitor, NULL))
+			return (ft_putstr_fd("Error while joining a thead.(monitor)", 2));
 	}
 	return (0);
 }
@@ -76,5 +76,4 @@ int	main(int ac, char **av)
 	if (set_threads(av, data))
 		return(_exit_philo(data), 1);
 	_exit_philo(data);
-	printf("OVEEEEER\n");
 }

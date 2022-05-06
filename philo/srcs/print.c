@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:07:27 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/06 13:32:33 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/06 16:04:49 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	printer(t_philo *philo, int id, char *str)
 		printf("%li %i %s\n", time, id + 1, str);
 		pthread_mutex_unlock(philo->data->mutex_print);
 	}
-	pthread_mutex_unlock(philo->data->mutex_dead);
 	pthread_mutex_unlock(philo->data->mutex_meal);
+	pthread_mutex_unlock(philo->data->mutex_dead);
 }
 
 int	ft_putstr_fd(char *str, int fd)
