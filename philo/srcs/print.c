@@ -6,11 +6,24 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:07:27 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/05 13:57:50 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/06 13:27:49 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void    printer(t_philo *philo, int id, char *str)
+{
+    long int    time;
+
+    time = 0;
+    pthread_mutex_lock(&philo->data->mutex_meal);
+    pthread_mutex_lock(&philo->data->mutex_dead);
+    if (philo->data->tm_need_eat != philo->meal_nbr && !philo->data->one_dead)
+    {
+        
+    }
+}
 
 int ft_putstr_fd(char *str, int fd)
 {

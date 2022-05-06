@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 16:11:42 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/05 17:05:37 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/06 12:47:20 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	init_philos_pthread(t_data *data, int i)
 		return (ft_putstr_fd("Malloc error.", 2));
 	if (pthread_mutex_init(data->philos[i].meal_lock, NULL))
 		return (ft_putstr_fd("Meal_lock mutex init error.", 2));
-	data->philos[i].monitor = malloc(sizeof(pthread_t));
+	data->philos[i].monitor = (pthread_t *)malloc(sizeof(pthread_t) * 1);
 	if (!data->philos[i].monitor)
 		return (ft_putstr_fd("Malloc error.", 2));
 	return (0);

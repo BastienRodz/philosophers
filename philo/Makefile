@@ -6,7 +6,7 @@
 #    By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 15:58:49 by barodrig          #+#    #+#              #
-#    Updated: 2022/05/05 16:17:30 by barodrig         ###   ########.fr        #
+#    Updated: 2022/05/06 13:12:24 by barodrig         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ SRCS			= srcs/philo.c \
 					srcs/utils.c \
 					srcs/free_all.c \
 					srcs/time.c \
-					srcs/routine.c
+					srcs/routine_philo.c\
+					srcs/routine_monitor.c
 
 OBJS			= $(SRCS:.c=.o)
 

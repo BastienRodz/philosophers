@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:03:43 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/05 16:59:36 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/06 13:14:52 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_philo
 	int					left;
 	int					right;
 	pthread_mutex_t		*meal_lock;
-	pthread_t 			monitor;
+	pthread_t 			*monitor;
 	struct s_data		*data;
 }               		t_philo;
 
@@ -55,8 +55,11 @@ typedef struct s_data
 }              			t_data;
 
 
-/* ROUTINE */
-void	*philo_routine(void *p_data);
+/* ROUTINE MONITOR */
+void		*monitor_routine(void *p_data);
+
+/* ROUTINE PHILO*/
+void		*philo_routine(void *p_data);
 
 /* PRINT */
 int 		ft_putstr_fd(char *str, int fd);
@@ -65,7 +68,6 @@ int 		ft_putstr_fd(char *str, int fd);
 long int	time_is(void);
 long int	time_from_start(t_data *data);
 void		sleep_opti(long int sleep_time);
-
 
 /* UTILS */
 int			ft_atoi(const char *str);

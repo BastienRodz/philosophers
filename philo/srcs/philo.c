@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:01:44 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/05 17:08:30 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/06 12:55:57 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	start_routine(t_data *data)
 	i = -1;
 	while (++i < data->philo_nbr)
 	{
-		if (i % 2 == 1)
-			sleep_opti(5);
+		 if (i % 2)
+		 	sleep_opti(2);
 		if (pthread_create(&data->philo_th[i], NULL, \
 				&philo_routine, (void *)&data->philos[i]))
 				return (ft_putstr_fd("Failed to create a philo thread.", 2));
@@ -37,8 +37,8 @@ int	wait_for_threads(t_data *data)
 	{
 		if (pthread_join(data->philo_th[i], NULL))
 			return (ft_putstr_fd("Error while joining a thread.(philo_th)", 2));
-		if (pthread_join(data->philos[i].monitor, NULL))
-			return (ft_putstr_fd("Error while joining a thead.(monitor)", 2));
+		/*if (pthread_join(*data->philos[i].monitor, NULL))
+			return (ft_putstr_fd("Error while joining a thead.(monitor)", 2));*/
 	}
 	return (0);
 }
@@ -53,9 +53,9 @@ int	set_threads(char **av, t_data *data)
 		return (1);
 	if (create_philo_threads(data))
 		return (1);
+	start_routine(data);
 	if (wait_for_threads(data))
 		return (1);
-	start_routine(data);
 	return (0);
 }
 
