@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:03:43 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/06 13:14:52 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/06 14:36:13 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ typedef struct s_data
 	long int			tmt_sleep;
 	long int			tm_need_eat;
 	long int			one_dead;
-	long int			tm_start;    
+	long int			tm_start;
+	long int			tot_meals;  
 	t_philo				*philos;
 	pthread_t			*philo_th;
 	pthread_mutex_t		*mutex_fork;
@@ -63,6 +64,7 @@ void		*philo_routine(void *p_data);
 
 /* PRINT */
 int 		ft_putstr_fd(char *str, int fd);
+void		printer(t_philo *philo, int id, char *str);
 
 /* TIME */
 long int	time_is(void);

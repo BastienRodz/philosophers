@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:55:48 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/05 16:11:22 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/06 14:36:23 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	data_init(t_data *data, char **av)
 	data->tmt_sleep = ft_atoi(av[4]);
 	data->tm_start = time_is();
 	data->one_dead = 0;
+	data->tot_meals = 0;
 	if (av[5])
 		data->tm_need_eat = ft_atoi(av[5]);
 	else
