@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 13:12:27 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/06 18:12:39 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/06 21:48:16 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	monitor_update_meal(t_philo *philo)
 
 	data = philo->data;
 	pthread_mutex_lock(data->mutex_meal);
-	if (data->tot_meals == data->philo_nbr)
+	if (data->tot_meals == data->philo_nbr && data->tm_need_eat != -1)
 	{
 		pthread_mutex_unlock(data->mutex_meal);
 		return (1);
