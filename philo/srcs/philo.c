@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:01:44 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/06 17:36:15 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/06 18:04:17 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	start_routine(t_data *data)
 	while (++i < data->philo_nbr)
 	{
 		 if (i % 2)
-		 	sleep_opti(9 );
+		 	sleep_opti(1);
 		if (pthread_create(&data->philo_th[i], NULL, \
 				&philo_routine, (void *)&data->philos[i]))
 				return (ft_putstr_fd("Failed to create a philo thread.", 2));
