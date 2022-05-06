@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:01:44 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/06 18:04:17 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/06 18:11:33 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ int	start_routine(t_data *data)
 	i = -1;
 	while (++i < data->philo_nbr)
 	{
-		 if (i % 2)
-		 	sleep_opti(1);
+		if (i % 2)
+			sleep_opti(1);
 		if (pthread_create(&data->philo_th[i], NULL, \
-				&philo_routine, (void *)&data->philos[i]))
-				return (ft_putstr_fd("Failed to create a philo thread.", 2));
+					&philo_routine, (void *)&data->philos[i]))
+			return (ft_putstr_fd("Failed to create a philo thread.", 2));
 	}
 	return (0);
 }
@@ -74,6 +74,6 @@ int	main(int ac, char **av)
 			return (ft_putstr_fd("Arguments can't be negatives numbers.", 2));
 	}
 	if (set_threads(av, data))
-		return(_exit_philo(data), 1);
+		return (_exit_philo(data), 1);
 	_exit_philo(data);
 }

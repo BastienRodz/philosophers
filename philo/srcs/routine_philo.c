@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 16:16:39 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/06 15:44:05 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/06 18:13:11 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	meal_nbr_update(t_philo *philo)
 {
-	t_data *data;
+	t_data	*data;
 
 	data = philo->data;
 	pthread_mutex_lock(data->mutex_meal);
@@ -26,8 +26,8 @@ void	meal_nbr_update(t_philo *philo)
 
 void	philo_cycle(t_philo *philo)
 {
-	t_data *data;
-	
+	t_data	*data;
+
 	data = philo->data;
 	pthread_mutex_lock(&data->mutex_fork[philo->right]);
 	printer(philo, philo->id, "has taken a fork");
@@ -44,7 +44,6 @@ void	philo_cycle(t_philo *philo)
 	printer(philo, philo->id, "is sleeping");
 	sleep_opti(data->tmt_sleep);
 	printer(philo, philo->id, "is thinking");
-	
 }
 
 int	must_philo_stop(t_philo *philo)

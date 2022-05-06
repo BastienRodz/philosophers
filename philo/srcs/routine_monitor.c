@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 13:12:27 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/06 15:38:20 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/06 18:12:39 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	monitor_update_meal(t_philo *philo)
 
 int	check_for_dead_philo(t_philo *philo)
 {
-	t_data 		*data;
+	t_data		*data;
 	long int	lst_meal;
 
 	data = philo->data;
@@ -52,7 +52,7 @@ int	check_for_dead_philo(t_philo *philo)
 
 void	*monitor_routine(void *p_data)
 {
-	t_philo 	*philo;
+	t_philo	*philo;
 
 	philo = (t_philo *)p_data;
 	while (1)

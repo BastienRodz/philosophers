@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 14:15:37 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/05 17:00:27 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/06 18:08:46 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	free_all_philos(t_data *data)
 {
 	int	i;
-	
+
 	i = -1;
 	while (++i < data->philo_nbr)
 	{
@@ -28,7 +28,7 @@ void	free_all_philos(t_data *data)
 	}
 }
 
-int		_exit_philo(t_data *data)
+int	_exit_philo(t_data *data)
 {
 	free_all_philos(data);
 	pthread_mutex_destroy(data->mutex_dead);

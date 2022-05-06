@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 14:41:49 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/05 16:35:35 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/06 18:13:54 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,20 @@
 
 long int	time_from_start(t_data *data)
 {
-	return(time_is() - data->tm_start);
+	return (time_is() - data->tm_start);
 }
 
 long int	time_is(void)
 {
-	struct timeval time;
-	long int	time_conv_ms;
+	struct timeval	time;
+	long int		time_conv_ms;
+
 	gettimeofday(&time, NULL);
 	time_conv_ms = (time.tv_sec * 1000) + (time.tv_usec / 1000);
 	return (time_conv_ms);
 }
 
-void		sleep_opti(long int sleep_time)
+void	sleep_opti(long int sleep_time)
 {
 	long int	start;
 
