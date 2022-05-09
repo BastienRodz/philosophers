@@ -1,0 +1,3 @@
+[submodule "alientest"]
+	path = alientest
+	url = git@github.com:lienardale/alientest_philosopher.git
