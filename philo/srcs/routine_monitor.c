@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 13:12:27 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/06 21:48:16 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/09 11:01:44 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,14 @@ int	monitor_update_meal(t_philo *philo)
 	t_data	*data;
 
 	data = philo->data;
+	sleep_opti(5);
 	pthread_mutex_lock(data->mutex_meal);
 	if (data->tot_meals == data->philo_nbr && data->tm_need_eat != -1)
 	{
 		pthread_mutex_unlock(data->mutex_meal);
+		pthread_mutex_lock(data->mutex_dead);
+		data->one_dead = 1;
+		pthread_mutex_unlock(data->mutex_dead);
 		return (1);
 	}
 	pthread_mutex_unlock(data->mutex_meal);
@@ -46,7 +50,6 @@ int	check_for_dead_philo(t_philo *philo)
 	}
 	if (monitor_update_meal(philo))
 		return (1);
-	sleep_opti(5);
 	return (0);
 }
 
