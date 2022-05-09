@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:01:44 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/06 22:07:26 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/09 12:34:31 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	wait_for_threads(t_data *data)
 	int	i;
 
 	i = -1;
-	while (++i < data->philo_nbr - 1)
+	while (++i < data->philo_nbr)
 	{
 		if (pthread_join(data->philo_th[i], NULL))
 			return (ft_putstr_fd("Error while joining a thread.(philo_th)", 2));
@@ -43,7 +43,7 @@ int	set_threads(char **av, t_data *data)
 	while (++i < data->philo_nbr)
 	{
 		if ((i % 2) == 0)
-			sleep_opti(data->tm_need_eat * 0.9);
+			sleep_opti(data->tm_need_eat);
 		if (pthread_create(&data->philo_th[i], NULL, \
 					&philo_routine, (void *)&data->philos[i]))
 			return (ft_putstr_fd("Failed to create a philo thread.", 2));

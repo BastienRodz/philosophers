@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 16:16:39 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/09 11:56:23 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/09 12:33:05 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,11 @@
 
 void	meal_nbr_update(t_philo *philo)
 {
-	t_data	*data;
-
-	data = philo->data;
-	pthread_mutex_lock(data->mutex_meal);
+	pthread_mutex_lock(philo->data->mutex_meal);
 	philo->meal_nbr++;
-	if (philo->meal_nbr == data->tm_need_eat)
-		data->tot_meals++;
-	pthread_mutex_unlock(data->mutex_meal);
+	if (philo->meal_nbr == philo->data->tm_need_eat)
+		philo->data->tot_meals++;
+	pthread_mutex_unlock(philo->data->mutex_meal);
 }
 
 void	philo_cycle(t_philo *philo)
@@ -51,17 +48,20 @@ int	must_philo_stop(t_philo *philo)
 	t_data	*data;
 
 	data = philo->data;
-	pthread_mutex_lock(data->mutex_meal);
 	pthread_mutex_lock(data->mutex_dead);
-	if ((data->tm_need_eat != -1 \
-			&& data->philo_nbr == data->tot_meals) || data->one_dead)
+	if (data->one_dead)
 	{
-		pthread_mutex_unlock(data->mutex_meal);
 		pthread_mutex_unlock(data->mutex_dead);
 		return (1);
 	}
-	pthread_mutex_unlock(data->mutex_meal);
 	pthread_mutex_unlock(data->mutex_dead);
+	pthread_mutex_lock(data->mutex_meal);
+	if (data->tm_need_eat != -1 && (data->philo_nbr == data->tot_meals))
+	{
+		pthread_mutex_unlock(data->mutex_meal);
+		return (1);
+	}
+	pthread_mutex_unlock(data->mutex_meal);
 	return (0);
 }
 
