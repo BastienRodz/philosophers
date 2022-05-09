@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:03:43 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/09 13:49:07 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/09 13:49:59 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <sys/time.h>
 # include <time.h>
 
+struct	s_philo;
+struct	s_data;
 
 // Struct that carry all the datas about one philo,
 // it has a pointer to the data struct and is the arg passed at the threads' creation.
