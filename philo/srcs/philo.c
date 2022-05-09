@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:01:44 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/09 12:34:31 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/09 14:12:28 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	set_threads(char **av, t_data *data)
 	while (++i < data->philo_nbr)
 	{
 		if ((i % 2) == 0)
-			sleep_opti(data->tm_need_eat);
+			sleep_opti(data->tm_need_eat * 0.9);
 		if (pthread_create(&data->philo_th[i], NULL, \
 					&philo_routine, (void *)&data->philos[i]))
 			return (ft_putstr_fd("Failed to create a philo thread.", 2));
@@ -59,7 +59,7 @@ int	main(int ac, char **av)
 	t_data	*data;
 
 	i = 0;
-	data = (t_data *)malloc(sizeof(t_data));
+	data = NULL;
 	if (ac < 5 || ac > 6)
 		return (ft_putstr_fd("Wrong number of arguments (5 or 6 needed).", 2));
 	while (++i < ac)
@@ -67,6 +67,7 @@ int	main(int ac, char **av)
 		if (ft_atoi(av[i]) < 0)
 			return (ft_putstr_fd("Arguments can't be negatives numbers.", 2));
 	}
+	data = (t_data *)malloc(sizeof(t_data));
 	if (set_threads(av, data))
 		return (_exit_philo(data), 1);
 	_exit_philo(data);
