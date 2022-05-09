@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 16:16:39 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/09 12:33:05 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/09 19:43:48 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	philo_cycle(t_philo *philo)
 	printer(philo, philo->id, "is sleeping");
 	sleep_opti(data->tmt_sleep);
 	printer(philo, philo->id, "is thinking");
+	//sleep_opti(data->tmt_eat / 2);
 }
 
 int	must_philo_stop(t_philo *philo)
@@ -70,7 +71,10 @@ void	*philo_routine(void *p_data)
 	t_philo	*philo;
 
 	philo = (t_philo *)p_data;
-	pthread_create(philo->monitor, NULL, &monitor_routine, philo);
+	pthread_mutex_lock(philo->data->mutex_init);
+	pthread_mutex_unlock(philo->data->mutex_init);
+	if (philo->id % 2 != 0)
+		sleep_opti(5);
 	if (philo->data->philo_nbr == 1)
 	{
 		printer(philo, philo->id, "has taken a fork");

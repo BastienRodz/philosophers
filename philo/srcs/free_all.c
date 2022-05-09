@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 14:15:37 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/09 12:30:32 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/09 18:56:44 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void	free_all_philos(t_data *data)
 		pthread_mutex_destroy(&data->mutex_fork[i]);
 		if (data->philos[i].meal_lock)
 			free(data->philos[i].meal_lock);
-		if (data->philos[i].monitor)
-			free(data->philos[i].monitor);
 	}
 }
 
@@ -34,6 +32,7 @@ int	_exit_philo(t_data *data)
 	pthread_mutex_destroy(data->mutex_dead);
 	pthread_mutex_destroy(data->mutex_meal);
 	pthread_mutex_destroy(data->mutex_print);
+	pthread_mutex_destroy(data->mutex_init);
 	if (data->philos)
 		free(data->philos);
 	if (data->philo_th)
@@ -46,6 +45,8 @@ int	_exit_philo(t_data *data)
 		free(data->mutex_meal);
 	if (data->mutex_fork)
 		free(data->mutex_fork);
+	if (data->mutex_init)
+		free(data->mutex_init);
 	free(data);
 	return (0);
 }

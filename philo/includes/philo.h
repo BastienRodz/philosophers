@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:03:43 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/09 13:50:34 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/09 19:10:35 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_philo
 	int					id;
 	int					meal_nbr;
 	long int			tm_last_meal;
-	int					left;	
+	int					left;
 	int					right;
 	pthread_mutex_t		*meal_lock;
 	pthread_t			*monitor;
@@ -47,6 +47,8 @@ typedef struct s_data
 	long int			tot_meals;
 	t_philo				*philos;
 	pthread_t			*philo_th;
+	pthread_t			*monitor;
+	pthread_mutex_t		*mutex_init;
 	pthread_mutex_t		*mutex_fork;
 	pthread_mutex_t		*mutex_print;
 	pthread_mutex_t		*mutex_dead;

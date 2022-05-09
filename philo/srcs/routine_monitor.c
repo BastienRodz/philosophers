@@ -6,18 +6,14 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 13:12:27 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/09 11:01:44 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/09 19:26:43 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	monitor_update_meal(t_philo *philo)
+int	monitor_update_meal(t_data *data)
 {
-	t_data	*data;
-
-	data = philo->data;
-	sleep_opti(5);
 	pthread_mutex_lock(data->mutex_meal);
 	if (data->tot_meals == data->philo_nbr && data->tm_need_eat != -1)
 	{
@@ -31,37 +27,45 @@ int	monitor_update_meal(t_philo *philo)
 	return (0);
 }
 
-int	check_for_dead_philo(t_philo *philo)
+int	check_for_dead_philo(t_data *data, int i)
 {
-	t_data		*data;
 	long int	lst_meal;
 
-	data = philo->data;
-	pthread_mutex_lock(philo->meal_lock);
-	lst_meal = philo->tm_last_meal;
-	pthread_mutex_unlock(philo->meal_lock);
+	pthread_mutex_lock(data->philos[i].meal_lock);
+	lst_meal = data->philos[i].tm_last_meal;
+	pthread_mutex_unlock(data->philos[i].meal_lock);
 	if (time_is() - lst_meal > data->tmt_die)
 	{
-		printer(philo, philo->id, "died");
+		printer(&data->philos[i], data->philos[i].id, "died");
 		pthread_mutex_lock(data->mutex_dead);
+		pthread_mutex_lock(data->mutex_print);
 		data->one_dead = 1;
+		pthread_mutex_unlock(data->mutex_print);
 		pthread_mutex_unlock(data->mutex_dead);
 		return (1);
 	}
-	if (monitor_update_meal(philo))
+	if (monitor_update_meal(data))
 		return (1);
 	return (0);
 }
 
 void	*monitor_routine(void *p_data)
 {
-	t_philo	*philo;
+	t_data *data;
+	int	i;
 
-	philo = (t_philo *)p_data;
+	data = (t_data *)p_data;
+	pthread_mutex_lock(data->mutex_init);
+	pthread_mutex_unlock(data->mutex_init);
 	while (1)
 	{
-		if (check_for_dead_philo(philo))
-			return (NULL);
+		i = -1;
+		while (++i < data->philo_nbr)
+		{
+			if (check_for_dead_philo(data, i))
+				return (NULL);
+		}
+		sleep_opti(2);
 	}
 	return (NULL);
 }

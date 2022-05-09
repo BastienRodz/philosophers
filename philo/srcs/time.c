@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 14:41:49 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/06 18:13:54 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/09 18:58:12 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ void	sleep_opti(long int sleep_time)
 
 	start = time_is();
 	while ((time_is() - start) < sleep_time)
-		usleep(sleep_time / 10);
+		usleep(sleep_time / 1000);
 }

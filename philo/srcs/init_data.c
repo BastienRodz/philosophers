@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:55:48 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/06 15:28:24 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/09 19:16:49 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,8 @@ int	get_mutex_ready(t_data *data)
 	if (pthread_mutex_init(data->mutex_meal, NULL))
 		return (ft_putstr_fd("Mutex initialization failed", 2));
 	while (++i < data->philo_nbr)
-	{
 		if (pthread_mutex_init(&data->mutex_fork[i], NULL))
 			return (ft_putstr_fd("Mutex initialization failed", 2));
-	}
 	return (0);
 }
 
@@ -45,6 +43,12 @@ int	init_data_mutex(t_data *data)
 		return (1);
 	data->mutex_dead = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
 	if (!data->mutex_dead)
+		return (1);
+	data->mutex_init = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+	if (!data->mutex_init)
+		return (1);
+	data->monitor = (pthread_t *)malloc(sizeof(pthread_t) * 1);
+	if (!data->monitor)
 		return (1);
 	return (0);
 }
