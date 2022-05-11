@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 16:16:39 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/10 17:58:07 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/11 10:09:28 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	philo_cycle(t_philo *philo)
 	printer(philo, philo->id, "is sleeping");
 	sleep_opti(data->tmt_sleep);
 	printer(philo, philo->id, "is thinking");
-	sleep_opti(data->tmt_eat * 0.5);
 }
 
 int	must_philo_stop(t_philo *philo)
@@ -71,7 +70,7 @@ void	launch_even_philo(t_data *data, t_philo *philo)
 	if (philo->id % 2 == 0)
 		return ;
 	else
-		usleep(data->tmt_eat / 2 * 1000);
+		sleep_opti(data->tmt_eat / 10);
 	return ;
 }
 
@@ -80,9 +79,9 @@ void	launch_odd_philo(t_data *data, t_philo *philo)
 	if (philo->id % 3 == 0)
 		return ;
 	else if (philo->id + 1 % 3 == 0)
-		usleep(data->tmt_eat / 2 * 1000);
+		usleep(data->tmt_eat / 300);
 	else
-		usleep(data->tmt_eat / 2 * 1000);
+		usleep(data->tmt_eat / 200);
 }
 
 void	*philo_routine(void *p_data)
@@ -106,7 +105,7 @@ void	*philo_routine(void *p_data)
 		if (must_philo_stop(philo))
 			return (NULL);
 		philo_cycle(philo);
-		usleep(200);
+		sleep_opti(philo->data->tmt_eat/800);
 	}
 	return (NULL);
 }
