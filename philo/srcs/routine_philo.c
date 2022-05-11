@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 16:16:39 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/09 19:43:48 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/10 17:58:07 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	philo_cycle(t_philo *philo)
 	printer(philo, philo->id, "is sleeping");
 	sleep_opti(data->tmt_sleep);
 	printer(philo, philo->id, "is thinking");
-	//sleep_opti(data->tmt_eat / 2);
+	sleep_opti(data->tmt_eat * 0.5);
 }
 
 int	must_philo_stop(t_philo *philo)
@@ -66,6 +66,25 @@ int	must_philo_stop(t_philo *philo)
 	return (0);
 }
 
+void	launch_even_philo(t_data *data, t_philo *philo)
+{
+	if (philo->id % 2 == 0)
+		return ;
+	else
+		usleep(data->tmt_eat / 2 * 1000);
+	return ;
+}
+
+void	launch_odd_philo(t_data *data, t_philo *philo)
+{
+	if (philo->id % 3 == 0)
+		return ;
+	else if (philo->id + 1 % 3 == 0)
+		usleep(data->tmt_eat / 2 * 1000);
+	else
+		usleep(data->tmt_eat / 2 * 1000);
+}
+
 void	*philo_routine(void *p_data)
 {
 	t_philo	*philo;
@@ -73,8 +92,10 @@ void	*philo_routine(void *p_data)
 	philo = (t_philo *)p_data;
 	pthread_mutex_lock(philo->data->mutex_init);
 	pthread_mutex_unlock(philo->data->mutex_init);
-	if (philo->id % 2 != 0)
-		sleep_opti(5);
+	if (philo->data->philo_nbr % 2 == 0)
+	 	launch_even_philo(philo->data, philo);
+	else
+		launch_odd_philo(philo->data, philo);
 	if (philo->data->philo_nbr == 1)
 	{
 		printer(philo, philo->id, "has taken a fork");
@@ -85,6 +106,7 @@ void	*philo_routine(void *p_data)
 		if (must_philo_stop(philo))
 			return (NULL);
 		philo_cycle(philo);
+		usleep(200);
 	}
 	return (NULL);
 }
