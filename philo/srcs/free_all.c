@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 14:15:37 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/09 18:56:44 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/12 16:08:39 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int	_exit_philo(t_data *data)
 		free(data->mutex_fork);
 	if (data->mutex_init)
 		free(data->mutex_init);
+	if (data->monitor)
+		free(data->monitor);
 	free(data);
 	return (0);
 }

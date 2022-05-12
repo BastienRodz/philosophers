@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:01:44 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/10 17:26:37 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/12 16:20:53 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@ int	wait_for_threads(t_data *data)
 	int	i;
 
 	i = -1;
+	pthread_mutex_unlock(data->mutex_init);
 	while (++i < data->philo_nbr)
 		if (pthread_join(data->philo_th[i], NULL))
 			return (ft_putstr_fd("Error while joining a thread.(philo_th)", 2));
+	if (pthread_join(*data->monitor, NULL))
+		return (ft_putstr_fd("Error while joining a thread.(monitor)", 2));
 	return (0);
 }
 
@@ -27,7 +30,6 @@ int	launch_monitor(t_data *data)
 {
 	if (pthread_create(data->monitor, NULL, &monitor_routine, (void *)data))
 		return (ft_putstr_fd("Impossible to create monitor thread", 2));
-	pthread_detach(*data->monitor);
 	return (0);
 }
 
@@ -45,19 +47,17 @@ int	set_threads(char **av, t_data *data)
 	if (create_philo_threads(data))
 		return (1);
 	pthread_mutex_lock(data->mutex_init);
-	if (launch_monitor(data))
-		return (1);
 	while (++i < data->philo_nbr)
 	{
 		if (pthread_create(&data->philo_th[i], NULL, \
 					&philo_routine, (void *)&data->philos[i]))
 			return (ft_putstr_fd("Failed to create a philo thread.", 2));
 	}
+	if (launch_monitor(data))
+		return (1);
 	data->tm_start = time_is();
-	pthread_mutex_unlock(data->mutex_init);
 	if (wait_for_threads(data))
 		return (1);
-	monitor_routine(data);
 	return (0);
 }
 

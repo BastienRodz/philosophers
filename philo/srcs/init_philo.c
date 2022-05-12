@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 16:11:42 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/09 18:49:19 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/12 16:33:03 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,17 @@ int	create_philo_threads(t_data *data)
 		data->philos[i].meal_nbr = 0;
 		data->philos[i].data = data;
 		data->philos[i].tm_last_meal = time_is();
-		if (!(i % 2))
-		{
-			data->philos[i].left = data->philos[i].id;
-			data->philos[i].right = (data->philos[i].id + 1) % data->philo_nbr;
-		}
-		else
+		data->philos[i].stop = 0;
+		//Modified
+		if (!(i + 1 % data->philo_nbr))
 		{
 			data->philos[i].right = data->philos[i].id;
 			data->philos[i].left = (data->philos[i].id + 1) % data->philo_nbr;
+		}
+		else
+		{
+			data->philos[i].left = data->philos[i].id;
+			data->philos[i].right = (data->philos[i].id + 1) % data->philo_nbr;
 		}
 		if (init_philos_pthread(data, i))
 			return (1);

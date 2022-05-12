@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:07:27 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/09 12:31:53 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/12 16:11:41 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,13 @@ void	printer(t_philo *philo, int id, char *str)
 
 	time = 0;
 	pthread_mutex_lock(philo->data->mutex_dead);
-	if (!philo->data->one_dead)
+	if (!philo->data->one_dead && !philo->stop)
 	{
 		pthread_mutex_lock(philo->data->mutex_print);
-		if (!philo->data->one_dead)
+		if (!philo->data->one_dead && !philo->stop)
 		{
-			pthread_mutex_unlock(philo->data->mutex_dead);
 			time = time_is() - philo->data->tm_start;
 			printf("%li %i %s\n", time, id + 1, str);
-			pthread_mutex_unlock(philo->data->mutex_print);
-			return ;
 		}
 		pthread_mutex_unlock(philo->data->mutex_print);
 	}

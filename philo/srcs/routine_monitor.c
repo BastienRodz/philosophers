@@ -6,53 +6,29 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 13:12:27 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/11 10:11:10 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/12 16:13:32 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	monitor_update_meal(t_data *data)
+void	philo_i_died(t_philo *philo, t_data *data, int i)
 {
-	pthread_mutex_lock(data->mutex_meal);
-	if (data->tot_meals == data->philo_nbr && data->tm_need_eat != -1)
-	{
-		pthread_mutex_unlock(data->mutex_meal);
-		pthread_mutex_lock(data->mutex_dead);
-		data->one_dead = 1;
-		pthread_mutex_unlock(data->mutex_dead);
-		return (1);
-	}
-	pthread_mutex_unlock(data->mutex_meal);
-	return (0);
-}
-
-int	check_for_dead_philo(t_data *data, int i)
-{
-	long int	lst_meal;
-
-	pthread_mutex_lock(data->philos[i].meal_lock);
-	lst_meal = data->philos[i].tm_last_meal;
-	pthread_mutex_unlock(data->philos[i].meal_lock);
-	if (time_is() - lst_meal > data->tmt_die)
-	{
-		printer(&data->philos[i], data->philos[i].id, "died");
-		pthread_mutex_lock(data->mutex_dead);
-		pthread_mutex_lock(data->mutex_print);
-		data->one_dead = 1;
-		pthread_mutex_unlock(data->mutex_print);
-		pthread_mutex_unlock(data->mutex_dead);
-		return (1);
-	}
-	if (monitor_update_meal(data))
-		return (1);
-	return (0);
+	printer(philo, philo->id, "died");
+	pthread_mutex_lock(data->mutex_dead);
+	pthread_mutex_lock(data->mutex_print);
+	data->one_dead = 1;
+	i = -1;
+	while (++i < data->philo_nbr)
+		data->philos[i].stop = 1;
+	pthread_mutex_unlock(data->mutex_dead);
+	pthread_mutex_unlock(data->mutex_print);
 }
 
 void	*monitor_routine(void *p_data)
 {
-	t_data *data;
-	int	i;
+	t_data 		*data;
+	int			i;
 
 	data = (t_data *)p_data;
 	pthread_mutex_lock(data->mutex_init);
@@ -62,10 +38,25 @@ void	*monitor_routine(void *p_data)
 		i = -1;
 		while (++i < data->philo_nbr)
 		{
-			if (check_for_dead_philo(data, i))
+			pthread_mutex_lock(data->mutex_dead);
+			if (data->one_dead || data->philos[i].stop)
+			{
+				pthread_mutex_unlock(data->mutex_dead);
+				return (NULL);
+			}
+			pthread_mutex_unlock(data->mutex_dead);
+			pthread_mutex_lock(data->philos[i].meal_lock);
+			if (time_is() - data->philos[i].tm_last_meal > data->tmt_die)
+			{
+				philo_i_died(&data->philos[i], data, i);
+				pthread_mutex_unlock(data->philos[i].meal_lock);
+				return (NULL);
+			}
+			pthread_mutex_unlock(data->philos[i].meal_lock);
+			if (check_meal(&data->philos[i]) || data->philos[i].stop)
 				return (NULL);
 		}
-		sleep_opti(1/5);
+		sleep_opti(5);
 	}
 	return (NULL);
 }

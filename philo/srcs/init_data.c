@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:55:48 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/09 19:16:49 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/12 16:20:29 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	get_mutex_ready(t_data *data)
 	if (pthread_mutex_init(data->mutex_dead, NULL))
 		return (ft_putstr_fd("Mutex initialization failed", 2));
 	if (pthread_mutex_init(data->mutex_meal, NULL))
+		return (ft_putstr_fd("Mutex initialization failed", 2));
+	if (pthread_mutex_init(data->mutex_init, NULL))
 		return (ft_putstr_fd("Mutex initialization failed", 2));
 	while (++i < data->philo_nbr)
 		if (pthread_mutex_init(&data->mutex_fork[i], NULL))
@@ -59,6 +61,7 @@ int	data_init(t_data *data, char **av)
 	data->tmt_die = ft_atoi(av[2]);
 	data->tmt_eat = ft_atoi(av[3]);
 	data->tmt_sleep = ft_atoi(av[4]);
+	data->tmt_think = data->tmt_die - (data->tmt_eat + data->tmt_sleep);
 	data->tm_start = time_is();
 	data->one_dead = 0;
 	data->tot_meals = 0;
@@ -66,7 +69,7 @@ int	data_init(t_data *data, char **av)
 		data->tm_need_eat = ft_atoi(av[5]);
 	else
 		data->tm_need_eat = -1;
-	data->philos = malloc(sizeof(t_philo) * data->philo_nbr);
+	data->philos = (t_philo *)malloc(sizeof(t_philo) * data->philo_nbr);
 	if (!data->philos)
 		return (1);
 	data->philo_th = (pthread_t *)malloc(sizeof(pthread_t)

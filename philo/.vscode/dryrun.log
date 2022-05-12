@@ -1,0 +1,27 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/mnt/nfs/homes/barodrig/philosophers/philo'
+mkdir -p  /mnt/nfs/homes/barodrig/philosophers/philo/Build/srcs 2>/dev/null
+echo Building /mnt/nfs/homes/barodrig/philosophers/philo/Build/srcs/routine_start.o
+clang -Wall -Wextra -Werror -pthread -c  -I/mnt/nfs/homes/barodrig/philosophers/philo/includes -o /mnt/nfs/homes/barodrig/philosophers/philo/Build/srcs/routine_start.o /mnt/nfs/homes/barodrig/philosophers/philo/srcs/routine_start.c 
+echo Building /mnt/nfs/homes/barodrig/philosophers/philo/Build/srcs/print.o
+clang -Wall -Wextra -Werror -pthread -c  -I/mnt/nfs/homes/barodrig/philosophers/philo/includes -o /mnt/nfs/homes/barodrig/philosophers/philo/Build/srcs/print.o /mnt/nfs/homes/barodrig/philosophers/philo/srcs/print.c 
+echo Building /mnt/nfs/homes/barodrig/philosophers/philo/Build/srcs/time.o
+clang -Wall -Wextra -Werror -pthread -c  -I/mnt/nfs/homes/barodrig/philosophers/philo/includes -o /mnt/nfs/homes/barodrig/philosophers/philo/Build/srcs/time.o /mnt/nfs/homes/barodrig/philosophers/philo/srcs/time.c 
+echo Building /mnt/nfs/homes/barodrig/philosophers/philo/Build/srcs/philo.o
+clang -Wall -Wextra -Werror -pthread -c  -I/mnt/nfs/homes/barodrig/philosophers/philo/includes -o /mnt/nfs/homes/barodrig/philosophers/philo/Build/srcs/philo.o /mnt/nfs/homes/barodrig/philosophers/philo/srcs/philo.c 
+echo Building /mnt/nfs/homes/barodrig/philosophers/philo/Build/srcs/init_philo.o
+clang -Wall -Wextra -Werror -pthread -c  -I/mnt/nfs/homes/barodrig/philosophers/philo/includes -o /mnt/nfs/homes/barodrig/philosophers/philo/Build/srcs/init_philo.o /mnt/nfs/homes/barodrig/philosophers/philo/srcs/init_philo.c 
+echo Building /mnt/nfs/homes/barodrig/philosophers/philo/Build/srcs/routine_philo.o
+clang -Wall -Wextra -Werror -pthread -c  -I/mnt/nfs/homes/barodrig/philosophers/philo/includes -o /mnt/nfs/homes/barodrig/philosophers/philo/Build/srcs/routine_philo.o /mnt/nfs/homes/barodrig/philosophers/philo/srcs/routine_philo.c 
+echo Building /mnt/nfs/homes/barodrig/philosophers/philo/Build/srcs/init_data.o
+clang -Wall -Wextra -Werror -pthread -c  -I/mnt/nfs/homes/barodrig/philosophers/philo/includes -o /mnt/nfs/homes/barodrig/philosophers/philo/Build/srcs/init_data.o /mnt/nfs/homes/barodrig/philosophers/philo/srcs/init_data.c 
+echo Building /mnt/nfs/homes/barodrig/philosophers/philo/Build/srcs/routine_monitor.o
+clang -Wall -Wextra -Werror -pthread -c  -I/mnt/nfs/homes/barodrig/philosophers/philo/includes -o /mnt/nfs/homes/barodrig/philosophers/philo/Build/srcs/routine_monitor.o /mnt/nfs/homes/barodrig/philosophers/philo/srcs/routine_monitor.c 
+echo Building /mnt/nfs/homes/barodrig/philosophers/philo/Build/srcs/free_all.o
+clang -Wall -Wextra -Werror -pthread -c  -I/mnt/nfs/homes/barodrig/philosophers/philo/includes -o /mnt/nfs/homes/barodrig/philosophers/philo/Build/srcs/free_all.o /mnt/nfs/homes/barodrig/philosophers/philo/srcs/free_all.c 
+echo Building /mnt/nfs/homes/barodrig/philosophers/philo/Build/srcs/utils.o
+clang -Wall -Wextra -Werror -pthread -c  -I/mnt/nfs/homes/barodrig/philosophers/philo/includes -o /mnt/nfs/homes/barodrig/philosophers/philo/Build/srcs/utils.o /mnt/nfs/homes/barodrig/philosophers/philo/srcs/utils.c 
+echo Linking philo
+clang -Wall -Wextra -Werror -pthread /mnt/nfs/homes/barodrig/philosophers/philo/Build/srcs/routine_start.o /mnt/nfs/homes/barodrig/philosophers/philo/Build/srcs/print.o /mnt/nfs/homes/barodrig/philosophers/philo/Build/srcs/time.o /mnt/nfs/homes/barodrig/philosophers/philo/Build/srcs/philo.o /mnt/nfs/homes/barodrig/philosophers/philo/Build/srcs/init_philo.o /mnt/nfs/homes/barodrig/philosophers/philo/Build/srcs/routine_philo.o /mnt/nfs/homes/barodrig/philosophers/philo/Build/srcs/init_data.o /mnt/nfs/homes/barodrig/philosophers/philo/Build/srcs/routine_monitor.o /mnt/nfs/homes/barodrig/philosophers/philo/Build/srcs/free_all.o /mnt/nfs/homes/barodrig/philosophers/philo/Build/srcs/utils.o -o philo
+make: Leaving directory '/mnt/nfs/homes/barodrig/philosophers/philo'
+ 

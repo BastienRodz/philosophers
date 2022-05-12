@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:03:43 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/11 08:47:59 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/12 16:20:37 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_philo
 	long int			tm_last_meal;
 	int					left;
 	int					right;
+	int					stop;
 	pthread_mutex_t		*meal_lock;
 	pthread_t			*monitor;
 	struct s_data		*data;
@@ -41,8 +42,9 @@ typedef struct s_data
 	long int			tmt_die;
 	long int			tmt_eat;
 	long int			tmt_sleep;
+	long int			tmt_think;
 	long int			tm_need_eat;
-	long int			one_dead;
+	int					one_dead;
 	long int			tm_start;
 	long int			tot_meals;
 	t_philo				*philos;
@@ -60,6 +62,9 @@ void		*monitor_routine(void *p_data);
 
 /* ROUTINE PHILO*/
 void		*philo_routine(void *p_data);
+int			must_philo_stop(t_philo *philo);
+int			philo_cycle(t_philo *philo);
+int			check_meal(t_philo *philo);
 
 /* PRINT */
 int			ft_putstr_fd(char *str, int fd);
