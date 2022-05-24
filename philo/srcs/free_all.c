@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 14:15:37 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/09 12:30:32 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/24 14:04:49 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	free_all_philos(t_data *data)
 		pthread_mutex_destroy(&data->mutex_fork[i]);
 		if (data->philos[i].meal_lock)
 			free(data->philos[i].meal_lock);
-		if (data->philos[i].monitor)
-			free(data->philos[i].monitor);
 	}
+	if (data->monitor)
+			free(data->monitor);
 }
 
 int	_exit_philo(t_data *data)

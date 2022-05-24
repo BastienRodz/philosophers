@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:55:48 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/06 15:28:24 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/24 14:01:32 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@ int	data_init(t_data *data, char **av)
 	data->tm_start = time_is();
 	data->one_dead = 0;
 	data->tot_meals = 0;
+	data->monitor = (pthread_t *)malloc(sizeof(pthread_t) * 1);
+	if (!data->monitor)
+		return (ft_putstr_fd("Malloc error.", 2));
 	if (av[5])
 		data->tm_need_eat = ft_atoi(av[5]);
 	else

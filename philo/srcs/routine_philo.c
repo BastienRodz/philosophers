@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 16:16:39 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/09 12:33:05 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/24 14:08:36 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	*philo_routine(void *p_data)
 	t_philo	*philo;
 
 	philo = (t_philo *)p_data;
-	pthread_create(philo->monitor, NULL, &monitor_routine, philo);
+	philo->tm_last_meal = time_is();
 	if (philo->data->philo_nbr == 1)
 	{
 		printer(philo, philo->id, "has taken a fork");
