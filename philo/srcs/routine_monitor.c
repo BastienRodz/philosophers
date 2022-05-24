@@ -6,13 +6,13 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 13:12:27 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/24 14:04:28 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/24 14:21:04 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	monitor_update_meal(t_philo *philo)
+static int	monitor_update_meal(t_philo *philo)
 {
 	t_data	*data;
 
@@ -31,7 +31,7 @@ int	monitor_update_meal(t_philo *philo)
 	return (0);
 }
 
-int	check_for_dead_philo(t_philo *philo)
+static int	check_for_dead_philo(t_philo *philo)
 {
 	t_data		*data;
 	long int	lst_meal;

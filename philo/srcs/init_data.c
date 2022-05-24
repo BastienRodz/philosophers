@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:55:48 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/24 14:01:32 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/24 14:27:34 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	get_mutex_ready(t_data *data)
 	return (0);
 }
 
-int	init_data_mutex(t_data *data)
+static int	init_data_mutex(t_data *data)
 {
 	data->mutex_fork = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t)
 			* data->philo_nbr);

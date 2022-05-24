@@ -6,16 +6,11 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 14:41:49 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/06 18:13:54 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/24 14:28:04 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-long int	time_from_start(t_data *data)
-{
-	return (time_is() - data->tm_start);
-}
 
 long int	time_is(void)
 {

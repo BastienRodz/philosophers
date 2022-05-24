@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:03:43 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/24 14:00:08 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/24 14:27:22 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void		printer(t_philo *philo, int id, char *str);
 
 /* TIME */
 long int	time_is(void);
-long int	time_from_start(t_data *data);
 void		sleep_opti(long int sleep_time);
 
 /* UTILS */
@@ -75,8 +74,8 @@ int			ft_atoi(const char *str);
 int			_exit_philo(t_data *data);
 
 /* INIT */
-int			data_init(t_data *data, char **ac);
-int			get_mutex_ready(t_data *data);
-int			create_philo_threads(t_data *data);
+int	data_init(t_data *data, char **av);
+int	create_philo_threads(t_data *data);
+int	get_mutex_ready(t_data *data);
 
 #endif

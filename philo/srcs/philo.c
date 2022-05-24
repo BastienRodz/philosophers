@@ -6,13 +6,13 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:01:44 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/24 14:08:04 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/24 14:19:29 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	wait_for_threads(t_data *data)
+static int	wait_for_threads(t_data *data)
 {
 	int	i;
 
@@ -27,7 +27,7 @@ int	wait_for_threads(t_data *data)
 	return (0);
 }
 
-int	set_threads(char **av, t_data *data)
+static int	set_threads(char **av, t_data *data)
 {
 	int	i;
 

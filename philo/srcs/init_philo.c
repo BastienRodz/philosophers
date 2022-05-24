@@ -6,13 +6,13 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 16:11:42 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/24 14:01:10 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/24 14:27:46 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	init_philos_pthread(t_data *data, int i)
+static int	init_philos_pthread(t_data *data, int i)
 {
 	data->philos[i].meal_lock = malloc(sizeof(pthread_mutex_t) \
 			* data->philo_nbr);

@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 16:16:39 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/24 14:08:36 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/24 14:20:54 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	philo_cycle(t_philo *philo)
 	printer(philo, philo->id, "is thinking");
 }
 
-int	must_philo_stop(t_philo *philo)
+static int	must_philo_stop(t_philo *philo)
 {
 	t_data	*data;
 
