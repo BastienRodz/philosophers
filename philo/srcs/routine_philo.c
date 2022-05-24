@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 16:16:39 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/24 14:20:54 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/24 15:17:21 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	*philo_routine(void *p_data)
 		if (must_philo_stop(philo))
 			return (NULL);
 		philo_cycle(philo);
+		sleep_opti(philo->data->tmt_eat * 0.9);
 	}
 	return (NULL);
 }
