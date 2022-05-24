@@ -6,7 +6,7 @@
 /*   By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:01:44 by barodrig          #+#    #+#             */
-/*   Updated: 2022/05/24 14:19:29 by barodrig         ###   ########.fr       */
+/*   Updated: 2022/05/24 15:01:36 by barodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,10 @@ int	main(int ac, char **av)
 		return (ft_putstr_fd("Wrong number of arguments (5 or 6 needed).", 2));
 	while (++i < ac)
 	{
-		if (ft_atoi(av[i]) < 0)
-			return (ft_putstr_fd("Arguments can't be negatives numbers.", 2));
+		if (ft_atoi(av[i]) <= 0)
+			return (ft_putstr_fd("Arguments can't be negatives or null numbers.", 2));
+		if (are_digits(av[i]))
+			return (ft_putstr_fd("Arguments must only be composed by digits.", 2));
 	}
 	data = (t_data *)malloc(sizeof(t_data));
 	if (set_threads(av, data))
