@@ -6,49 +6,72 @@
 #    By: barodrig <barodrig@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 15:58:49 by barodrig          #+#    #+#              #
-#    Updated: 2022/05/06 13:12:24 by barodrig         ###   ########.fr        #
+#    Updated: 2022/05/24 13:41:23 by barodrig         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-ELLOW			= \033[1;33m
+YELLOW			= \033[1;33m
 GREEN			= \033[1;32m
 
-SRCS			= srcs/philo.c \
-					srcs/print.c \
-					srcs/init_data.c \
-					srcs/init_philo.c \
-					srcs/utils.c \
-					srcs/free_all.c \
-					srcs/time.c \
-					srcs/routine_philo.c\
-					srcs/routine_monitor.c
+TARGET = philo
 
-OBJS			= $(SRCS:.c=.o)
+PROJDIR = $(realpath $(CURDIR))
+SOURCEDIR := $(PROJDIR)
+BUILDDIR := $(PROJDIR)/Build
+INCLUDESDIR := $(PROJDIR)/includes
 
-CC				= clang
-RM				= rm -f
-INCLUDE			= -I ./includes/
-CFLAGS			= -Wall -Wextra -Werror -pthread -I./includes
+DIRS		= srcs
+SOURCEDIRS	= $(foreach dir, $(DIRS), $(addprefix $(SOURCEDIR)/, $(dir)))
+TARGETDIRS	= $(foreach dir, $(DIRS), $(addprefix $(BUILDDIR)/, $(dir)))
+
+INCLUDES = $(foreach dir, $(INCLUDESDIR), $(addprefix -I, $(dir)))
+
+VPATH = $(SOURCEDIRS)
+
+SOURCES = $(foreach dir,$(SOURCEDIRS),$(wildcard $(dir)/*.c))
+
+OBJS := $(subst $(SOURCEDIR),$(BUILDDIR),$(SOURCES:.c=.o))
+
+DEPS = $(OBJS:.o=.d)
+
+CC				= clang -Wall -Wextra -Werror -pthread
+RM				= rm -rf
+RMDIR			= rm -rf
+MKDIR			= mkdir -p
+SEP				=/
+ERRIGNORE 		= 2>/dev/null
 NAME			= philo
 
-all:			$(NAME)
+PSEP = $(strip $(SEP))
 
-.c.o:
-				@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $(<:.c=.o)
+define generateRules
+$(1)/%.o: %.c
+	@echo Building $$@
+	@$(CC) -c $$(INCLUDES) -o $$(subst /,$$(PSEP),$$@) $$(subst /,$$(PSEP),$$<) 
+endef
 
-$(NAME):		$(OBJS)
-				@echo "\n${GREEN} |   Compiling Philosophers"
-				@${CC} ${CFLAGS} ${INCLUDE} -o ${NAME} ${OBJS}
-				@echo "${YELLOW}          [OK]\n"
+all: directories $(TARGET)
 
+$(TARGET): $(OBJS)
+	@echo Linking $@
+	@$(CC) $(OBJS) -o $(TARGET)
+
+-include $(DEPS)
+
+# Generate rules
+$(foreach targetdir, $(TARGETDIRS), $(eval $(call generateRules, $(targetdir))))
+
+directories: 
+	@$(MKDIR) $(subst /,$(PSEP),$(TARGETDIRS)) $(ERRIGNORE)
+
+# Remove all objects, dependencies and executable files generated during the build
 clean:
-				@echo "\n${GREEN} |   Cleaning Files"
-				@$(RM) $(OBJS)
-				@echo "${YELLOW}          [OK]\n"
+	@$(RMDIR) $(subst /,$(PSEP), $(PROJDIR)/Build) $(ERRIGNORE)
+	@echo Cleaning done ! 
 
 fclean:			clean
-				@$(RM) $(NAME)
+				@$(RM) $(TARGET) $(ERRIGNORE)
 
 re:				fclean all
 
-.PHONY:			all clean fclean re
+.PHONY:			all clean fclean re directories
